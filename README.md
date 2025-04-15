@@ -1,6 +1,6 @@
-# Airbnb Price Prediction Model
+# NYC Airbnb Price Prediction and Analysis
 
-This project implements a machine learning model to predict Airbnb listing prices based on various features. The model uses Linear Regression and includes comprehensive data preprocessing steps.
+The initial phase of this project was to implements a machine learning model to predict Airbnb listing prices based on various features. The model uses Linear Regression and includes comprehensive data preprocessing steps. Now, we are building off the previous model to allow for visualization. Visualizing the data can give important insight to the trends of the data and overall increase interpretability. 
 
 ## Project Overview
 
@@ -8,111 +8,66 @@ This project was developed as part of a machine learning assignment, focusing on
 1. Data preprocessing and cleaning
 2. Model training and evaluation
 3. API development for model deployment
+4. Creation of streamlit app to visual the data 
 
 ## Features
+- Creation of an interactive visualization model for NYC Airbnb data
+    - This includes metrics on average nights spent, bathrooms, number of reviews
+- Users are able to filter through the data based on variables they find most important to them, for example by price range and room type
+- Multiple visualization options:
+  - Price Distribution
+  - Room Type Distribution
+  - Neighborhood Analysis
+  - Price vs. Reviews Analysis
+- Raw data exploration
 
-- Data preprocessing with handling of missing values and outliers
-- Feature scaling using StandardScaler
-- Linear Regression model for price prediction
-- RESTful API endpoints for model training and prediction
-- Error handling and input validation
 
 ## Data Preprocessing Steps
 
-1. Price cleaning: Removes '$' and ',' characters, converts to float
-2. Missing value handling: Fills missing values with median for numerical columns
-3. Outlier removal: Uses IQR method to remove outliers from all numerical columns
-4. Feature scaling: Standardizes features using StandardScaler
-
-## Model Details
-
-The project uses a Linear Regression model with the following features:
-- Number of bedrooms
-- Number of bathrooms
-- Number of people it accommodates
-
-The model includes:
-- Feature scaling for better performance
-- Train/test split (80/20)
-- Performance evaluation using R² scores
-- Model persistence using joblib
-
-## API Endpoints
-
-### 1. Train Model
-```
-POST /reload
-```
-Trains the model using the current dataset. Returns training and test R² scores.
-
-### 2. Make Predictions
-```
-POST /predict
-```
-Makes price predictions based on input features.
-
-Example request body:
-```json
-{
-    "bedrooms": 2,
-    "bathrooms": 1,
-    "accommodates": 4
-}
-```
-
-## Setup and Installation
-
-1. Clone the repository:
+1. Clone this repository:
 ```bash
-git clone <your-repository-url>
-cd <repository-name>
+git clone [your-repository-url]
+cd nyc-airbnb-price-predicition
 ```
 
-2. Install dependencies:
+2. Create a virtual environment and activate it:
+```bash
+python -m venv .venv
+source .venv/bin/activate  # On Windows, use: .venv\Scripts\activate
+```
+
+3. Install the required packages and discrepancies:
 ```bash
 pip install -r requirements.txt
 ```
 
-3. Run the Flask application:
+## Streamlit App 
+
+Run the Streamlit app:
 ```bash
-python app.py
+streamlit run streamlit_app.py
 ```
 
-The application will be available at `http://127.0.0.1:5001`
+The app will then be opned on a web browser at `http://localhost:8501`.
 
-## Dependencies
+## Data Collection Source
 
-- Flask==3.0.2
-- pandas
-- scikit-learn
-- joblib
-- numpy
-- Flask-SQLAlchemy==3.1.1
-- SQLAlchemy==2.0.35
-- requests==2.26.0
-- flasgger==0.9.7.1
-- gunicorn==20.1.0
-- pytest==8.3.3
-- pytest-flask==1.3.0
-
-## Model Performance
-
-The model's performance is evaluated using R² scores on both training and test sets. These scores are displayed when the model is trained using the `/reload` endpoint.
+The data is sourced from Inside Airbnb (http://insideairbnb.com/), specifically the NYC listings dataset from January 2024.
 
 ## Project Structure
 
-```
-.
-├── app.py              # Main Flask application
-├── requirements.txt    # Project dependencies
-├── README.md          # Project documentation
-├── .gitignore         # Git ignore rules
-└── listings.csv       # Dataset (not included in repository)
-```
+- `streamlit_app.py`: Main application file
+- `requirements.txt`: Python package dependencies
+- `README.md`: Project documentation
 
-## Testing
+## Deployment
 
-The project includes pytest configuration for testing the API endpoints. Run tests using:
-```bash
-pytest
-``` 
+This app can be deployed on Streamlit Cloud. To deploy:
+1. Push your code to GitHub
+2. Go to https://streamlit.io/cloud
+3. Connect your GitHub repository
+4. Deploy the app
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details. 
